@@ -1,0 +1,43 @@
+.nopadding{
+  padding: 1px !important;  
+  margin: 0px 5px 5px 0px !important;
+}
+
+.padding10{
+  padding:10px;
+}
+
+.padding5{
+  padding: 5px;
+}
+
+.alignCenter{
+  text-align: center;
+}
+
+.imageIcon{
+  height: 100px;
+  width:100px;
+  border-radius: 20px;
+}
+
+.postImage{
+  max-height: 240px;
+}
+
+.greyText{
+  color: grey;
+}
+
+.smallText{
+  font-size: 14px;
+}
+
+.colorBlack{
+  color: black;
+}
+
+.textLoved{
+  color: red;
+  font-weight: bold;
+}
