@@ -41,3 +41,28 @@
   color: red;
   font-weight: bold;
 }
+
+.textShared{
+  font-weight: bold;
+  color:dodgerblue;
+}
+
+.nodecoration{
+  text-decoration: none;
+}
+
+.nodecoration:hover{
+  text-decoration: none;
+}
+
+
+.commentBtn{
+  background-color: royalblue;
+  color: white;
+  padding: 5px !important;
+  margin: 0px !important;
+}
+
+.commentHeader{
+  border-bottom: green 2px solid;
+}
