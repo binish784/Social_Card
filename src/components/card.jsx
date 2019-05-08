@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {FaHeart,FaShare,FaRegComments} from 'react-icons/fa';
+import PopUp from './popup';
 
 class SocialCard extends Component { 
 
@@ -9,12 +10,12 @@ class SocialCard extends Component {
             'Default Comment',
             'Second Comment'
         ],
+        'visible':false,
         'like':50,
         'comment':0,
         'share':5,
         'liked':false,
         'shared':false,
-        'commented':false,
         'comment_text':'',
     }
 
@@ -31,11 +32,6 @@ class SocialCard extends Component {
         this.setState({like,liked});
     }
 
-    handleComment=(e)=>{
-        let comment=this.state.comment;
-        comment=comment+1;
-        this.setState({comment});
-    }
     
     handleShare=(e)=>{
         if(!this.state.shared){
@@ -92,12 +88,26 @@ class SocialCard extends Component {
         }
     }
 
+    closePopUp=()=>{
+        let visible=this.state.visible;
+        visible=false; 
+        console.log("state changed to " + visible);
+        this.setState({visible});
+    }
+
+    showPopUp=()=>{
+        let visible=this.state.visible;
+        visible=true; 
+        console.log("state changed to " + visible);
+        this.setState({visible});
+    }
+
     render(){
        return (
            <div className='container'>
            <div className='row'>
           
-                <div className='col-md-8'>
+                <div className='col-md-8 offset-md-2'>
                 <hr></hr>
                     <div className='row'>
                         <div className='col-sm-2 nopadding'>
@@ -124,31 +134,40 @@ class SocialCard extends Component {
 
                             <div className='row'>
                                 {this.showLike()}
-                                <div className='col-sm-4 alignCenter padding5'><a href="javascript:void(0)" className='nodecoration' onClick={this.handleComment}>{this.state.comments.length}&nbsp;&nbsp; <FaRegComments size={20}/></a></div>
+                                <div className='col-sm-4 alignCenter padding5'>
+                                    <a href="javascript:void(0)" className='nodecoration' onClick={this.showPopUp}>
+                                        {this.state.comments.length}&nbsp;&nbsp; <FaRegComments size={20}/>
+                                    </a>
+                                </div>
                                 {this.showShare()}
                             </div>
-                            
-                          
                             </div>
                     </div>
                     
                 <hr></hr>
                 </div>
-                <div className='col-md-4'>
+               
+            </div>
+            <PopUp isOpen={this.state.visible}>
                 <br></br>
                 <p className='commentHeader'>Comments:</p>
                 
-                <div>
-                    <input type='text' placeholder='Comment Here...' onKeyPress={this.handleKeyPress} onChange={this.handleChange} value={this.state.comment_text}></input>
-                    &nbsp;&nbsp;&nbsp;<input type='submit' value='Comment' onClick={this.addComment}></input>
-                </div>
+                <div className='row'>
+                    <div className='col-md-10'>
+                        <input type='text' className='form-control' placeholder='Comment Here...' onKeyPress={this.handleKeyPress} onChange={this.handleChange} value={this.state.comment_text}></input>
+                    </div>
+                    <div className='col-md-2'>
+                        <input type='submit' className='btn btn-primary' value='Comment' onClick={this.addComment}></input>
+                
+                    </div>
+                    </div>
                 <br></br>
                 {this.state.comments.map((val,key)=>
-                    <p key={key}>{val}</p>
+                    <div className='commentRow' key={key}>{val}</div>
                     )}
-                </div>
-            </div>
-
+                
+                <a href='javascript:void(0)' id='popup-close-btn' onClick={this.closePopUp}>X</a>
+            </PopUp>
             </div>
        );
    }
