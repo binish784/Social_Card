@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {FaHeart,FaShare,FaRegComments} from 'react-icons/fa';
 import PopUp from './popup';
+import Comment from './comment';
 
 class SocialCard extends Component { 
 
@@ -120,7 +121,7 @@ class SocialCard extends Component {
                             <br></br>
                             
                             <a href='javascript:void(0)' className='colorBlack'><div className='card'>
-                                <img src='https://images.alphacoders.com/511/thumb-1920-511052.jpg' className='postImage card-img-top img-fluid'></img>
+                                <img src={this.props.img} className='postImage card-img-top img-fluid'></img>
                                 <div className='card-body'>
                                
                                     <b className='card-title'>
@@ -149,22 +150,39 @@ class SocialCard extends Component {
                
             </div>
             <PopUp isOpen={this.state.visible}>
-                <br></br>
-                <p className='commentHeader'>Comments:</p>
-                
+
                 <div className='row'>
-                    <div className='col-md-10'>
-                        <input type='text' className='form-control' placeholder='Comment Here...' onKeyPress={this.handleKeyPress} onChange={this.handleChange} value={this.state.comment_text}></input>
+                    <div className='col-md-8'>
+                        <b>{this.props.title}</b>&nbsp;&nbsp;<span className='greyText'>@ThePracticalDev</span><br></br>
+                        {this.props.subTitle}
+                        <br></br>
+                        <div className='PopUp-image-block'>
+                            <img src={this.props.img} className='PopUp-image'></img>
+                        </div><br></br>
+                        {this.props.description}<br></br>
+                        Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                         Facere architecto aperiam sint soluta veniam amet consequuntur
+                          doloremque sapiente! Minima necessitatibus labore odio magnam 
+                          ut corporis suscipit velit provident .
                     </div>
-                    <div className='col-md-2'>
-                        <input type='submit' className='btn btn-primary' value='Comment' onClick={this.addComment}></input>
-                
+                    <div className='col-md-4'>
+                        <br></br>
+                        <p className='commentHeader'>Comments:</p>
+                        <div className='row'>
+                            <div className='col-md-9 nopadding'>
+                                <input type='text' className='form-control' placeholder='Comment Here...' onKeyPress={this.handleKeyPress} onChange={this.handleChange} value={this.state.comment_text}></input>
+                            </div>
+                            <div className='col-md-2 nopadding'>
+                                <input type='submit' className='btn btn-primary' value='Send' onClick={this.addComment}></input>
+                            </div>
+                        </div>
+                        <br></br>
+                        {this.state.comments.map((val,key)=>
+                            <Comment key={key} commentText={val}/>
+                            )}
                     </div>
-                    </div>
-                <br></br>
-                {this.state.comments.map((val,key)=>
-                    <div className='commentRow' key={key}>{val}</div>
-                    )}
+                </div>
+            
                 
                 <a href='javascript:void(0)' id='popup-close-btn' onClick={this.closePopUp}>X</a>
             </PopUp>
